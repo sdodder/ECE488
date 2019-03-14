@@ -1,0 +1,87 @@
+/*============= ECE 488 project ========================================================================================
+ *====Filename: SProjAccelerometer
+ *====Authors: Spencer Dodder
+ *====Last updated: 03/14/2019
+ *======================================================================================================================
+ */
+
+/*============= Dependencies ===========================================================================================
+ *==== Arduino IDE
+ *==== Wire.h
+ *==== Adafruit_MMA8451.h
+ *==== Adafruit_Sensor.h
+ *======================================================================================================================
+ */
+ 
+/*============= Examples ===============================================================================================
+ *====Expected output (at rest readings):
+    Starting
+    2143
+    131
+    133
+    129
+    126
+    136
+    131
+    237
+    751
+    524
+    -43
+    -33
+    -45
+    -39
+    -39
+    -36
+    -35
+    -40
+    -39
+    -40
+ *======================================================================================================================
+ */
+
+/*============= Trouble Shooting =======================================================================================
+ *==== First check that the baud rate in the Serial Monitor window matches baud rate that is set.
+ *==== If "No Start" is printed then check wire connections to accelerometer.
+ *======================================================================================================================
+ */
+
+//Dependencies
+#include <Wire.h>
+#include <Adafruit_MMA8451.h>
+#include <Adafruit_Sensor.h>
+
+//Create an instance of the acceleromerter "mma"
+Adafruit_MMA8451 mma = Adafruit_MMA8451();
+
+//Create array for data
+int AccData[2048];
+
+//Start up
+void setup(void) {
+  while(!Serial);
+  Serial.begin(9600);
+
+  if (! mma.begin()) {
+    Serial.println("No Start");
+    while (1);
+  }
+  Serial.println("Starting");
+  
+}
+
+//Main loop for body of code
+void loop() {
+  //get data
+  for(int i = 0; i < 2048; i++){
+    mma.read();
+    AccData[i] = mma.x;
+  }
+
+  //print data
+  for(int i = 0; i < 2048; i++){
+    Serial.println(AccData[i]);
+  }
+  delay(1000);    //delay in miliseconds
+  
+
+}
