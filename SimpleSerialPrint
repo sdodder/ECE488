@@ -33,6 +33,7 @@ void setup() {
 
 }
 
+//Main loop for body of code
 void loop() {
   Serial.println("Snapple"); //Print command
   delay(1000);               //Delay time in miliseconds
