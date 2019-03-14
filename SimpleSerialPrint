@@ -1,0 +1,39 @@
+/*============= ECE 488 project ========================================================================================
+ *====Filename: SimpleSerialPrint
+ *====Authors: Spencer Dodder
+ *====Last updated: 03/14/2019
+ *======================================================================================================================
+ */
+
+/*============= Dependencies ===========================================================================================
+ *==== Arduino IDE
+ *==== Wire.h
+ *
+ *======================================================================================================================
+ */
+ 
+/*============= Examples ===============================================================================================
+ *====Expected output: Repeated printing of "Snapple" once a second.
+ *======================================================================================================================
+ */
+
+/*============= Trouble Shooting =======================================================================================
+ *==== If arbitray symbols are printed or other issues first check that the baud rate in the Serial Monitor window
+ *==== matches baud rate that is set.
+ *======================================================================================================================
+ */
+
+//Dependency
+#include <Wire.h>
+
+//Start up
+void setup() {
+  while(!Serial);       //Prevents start up till Serial Monitor is opened
+  Serial.begin(9600);   //Sets baud rate to 9600 for Serial Monitor
+
+}
+
+void loop() {
+  Serial.println("Snapple"); //Print command
+  delay(1000);               //Delay time in miliseconds
+}
