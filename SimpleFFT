@@ -1,0 +1,61 @@
+/*============= ECE 488 project ========================================================================================
+ *====Filename: SimpleFFT
+ *====Authors: Spencer Dodder
+ *====Last updated: 03/14/2019
+ *======================================================================================================================
+ */
+
+/*============= Dependencies ===========================================================================================
+ *==== Arduino IDE
+ *==== Wire.h
+ *==== Adafruit_ZeroFFT.h
+ *==== signal.h
+ *======================================================================================================================
+ */
+ 
+/*============= Examples ===============================================================================================
+ *====Expected output:
+ *
+
+ * 
+ *======================================================================================================================
+ */
+
+/*============= Trouble Shooting =======================================================================================
+ *==== If arbitray symbols are printed or other issues first check that the baud rate in the Serial Monitor window
+ *==== matches the baud rate that is set.
+ *======================================================================================================================
+ */
+#include "Adafruit_ZeroFFT.h"
+#include "signal.h"
+
+//the signal in signal.h has 2048 samples. Set this to a value between 16 and 2048 inclusive.
+//this must be a power of 2
+#define DATA_SIZE 256
+
+//the sample rate
+#define FS 800
+
+// the setup routine runs once when you press reset:
+void setup() {
+  Serial.begin(115200);
+  while(!Serial); //wait for serial to be ready
+
+  //run the FFT
+  ZeroFFT(signal, DATA_SIZE);
+
+  //data is only meaningful up to sample rate/2, discard the other half
+  for(int i=0; i<DATA_SIZE/2; i++){
+    
+    //print the frequency
+    Serial.print(FFT_BIN(i, FS, DATA_SIZE));
+    Serial.print(" Hz: ");
+
+    //print the corresponding FFT output
+    Serial.println(signal[i]);
+  }
+}
+
+void loop() {
+  //don't even do anything
+}
