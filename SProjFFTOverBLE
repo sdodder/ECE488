@@ -150,7 +150,7 @@ void setup(void)
 
 
 //Main loop for body of code
-/*Prints a random sent of numbers to app
+/*Prints Data FFT to app
  * logic: read data
  *        run FFT
  *        print data to app via bluetooth
