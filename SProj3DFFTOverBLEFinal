@@ -210,37 +210,42 @@ void loop(void)
   
   //Run the FFT for x dimention
   ZeroFFT(AccxData, DATA_SIZE);
+   
+  //Transmit x
+  for(int i = 0; i < DATA_SIZE/2; i++){
+      //ble.println((String) FFT_BIN(i, FS, DATA_SIZE));            //print the frequency
+      ble.println((String) AccxData[i]);    //print over bluetooth (must be cast as a string or char)
+      Serial.println(AccxData[i]);        //prints to Serial Monitor for debugging (also you can use Serial plotter to compare results)
+  }
 
-    //Get data in x
+    //Get data in y
   for(int i = 0; i < 2048; i++){
     mma.read();
     AccyData[i] = mma.y;
   }
   
-  //Run the FFT for x dimention
+  //Run the FFT for y dimention
   ZeroFFT(AccyData, DATA_SIZE);
 
-    //Get data in x
+  //Transmit y
+  for(int i = 0; i < DATA_SIZE/2; i++){
+      //ble.println((String) FFT_BIN(i, FS, DATA_SIZE));            //print the frequency
+      ble.println((String) AccyData[i]);    //print over bluetooth (must be cast as a string or char)
+      Serial.println(AccyData[i]);        //prints to Serial Monitor for debugging (also you can use Serial plotter to compare results)
+  }
+
+  //Get data in z
   for(int i = 0; i < 2048; i++){
     mma.read();
     AcczData[i] = mma.z;
   }
   
-  //Run the FFT for x dimention
+  //Run the FFT for z dimention
   ZeroFFT(AcczData, DATA_SIZE);
-   
-  //Send 3D Data over
-  for(int i = 0; i < DATA_SIZE/2; i++){
-      ble.println((String) AccxData[i]);    //print over bluetooth (must be cast as a string or char)
-      Serial.println(AccxData[i]);        //prints to Serial Monitor for debugging (also you can use Serial plotter to compare results)
-  }
-
-  for(int i = 0; i < DATA_SIZE/2; i++){
-      ble.println((String) AccyData[i]);    //print over bluetooth (must be cast as a string or char)
-      Serial.println(AccyData[i]);        //prints to Serial Monitor for debugging (also you can use Serial plotter to compare results)
-  }
   
+  //Transmit z
   for(int i = 0; i < DATA_SIZE/2; i++){
+      //ble.println((String) FFT_BIN(i, FS, DATA_SIZE));            //print the frequency
       ble.println((String) AcczData[i]);    //print over bluetooth (must be cast as a string or char)
       Serial.println(AcczData[i]);        //prints to Serial Monitor for debugging (also you can use Serial plotter to compare results)
   }
