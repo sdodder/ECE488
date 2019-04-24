@@ -72,6 +72,8 @@
 /*============= Trouble Shooting =======================================================================================
  *==== If arbitray symbols are printed or other issues first check that the baud rate in the Serial Monitor window
  *==== matches baud rate that is set.
+ *==== To set up send full FFT data over Bluetooth comment in lines 249, 233 and 217 to include frequencies for z, y and x data respectively
+ *====   example: comment in //ble.println((String) FFT_BIN(i, FS, DATA_SIZE));            //print the frequency to include frequency data
  *======================================================================================================================
  */
 
